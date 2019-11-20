@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.module.api.mapper.MerchantNotifyMapper">
+  <resultMap id="BaseResultMap" type="com.module.api.entity.MerchantNotifyList">
+    <result column="header" jdbcType="VARCHAR" property="header" />
+    <collection property="children" ofType="com.module.api.entity.MerchantNotify">
+      <result column="ID" jdbcType="VARCHAR" property="id" />
+      <result column="USER_ID" jdbcType="DECIMAL" property="userId" />
+      <result column="ORG_ID" jdbcType="DECIMAL" property="orgId" />
+      <result column="M_ORDER_NO" jdbcType="VARCHAR" property="mOrderNo" />
+      <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+      <result column="STATUS" jdbcType="VARCHAR" property="status" />
+      <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+      <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    </collection>
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    to_char(m.create_date, 'yyyy-mm-dd') header,m.*
+    from MERCHANT_NOTIFY m
+    <trim prefixOverrides="and | or" prefix="where ">
+      <if test="startTime!=null and startTime!='' ">
+        <![CDATA[   and create_date >= to_date(#{startTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')  ]]>
+      </if>
+      <if test="endTime!=null and endTime!='' ">
+        <![CDATA[   and create_date <= to_date(#{endTime,jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')   ]]>
+      </if>
+      <if test="orgId !=null and orgId !=''">
+        AND ORG_ID =#{orgId,jdbcType=DECIMAL}
+      </if>
+
+      <if test="userId !=null and userId !=''">
+        AND USER_ID = #{userId,jdbcType=DECIMAL}
+      </if>
+      <if test="id!=null">
+        and id !=#{id,jdbcType=DECIMAL}
+      </if>
+      <if test="status!=null and status!=''">
+        and status =#{status,jdbcType=VARCHAR}
+      </if>
+      <if test="mOrderNo!=null and mOrderNo!=''">
+        and m_order_no =#{mOrderNo,jdbcType=VARCHAR}
+      </if>
+    </trim>
+    order by create_date desc
+  </select>
+
+</mapper>
