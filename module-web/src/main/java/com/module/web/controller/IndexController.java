@@ -1,10 +1,11 @@
 package com.module.web.controller;
 import com.module.api.entity.MerchantNotifyList;
-import com.module.service.MerchantNotifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import service.MerchantNotifyService;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;

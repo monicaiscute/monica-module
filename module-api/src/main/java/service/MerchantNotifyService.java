@@ -1,4 +1,4 @@
-package com.module.service;
+package service;
 import com.module.api.entity.MerchantNotifyList;
 
 import java.util.List;

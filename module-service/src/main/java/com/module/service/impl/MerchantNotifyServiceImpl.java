@@ -1,8 +1,9 @@
 package com.module.service.impl;
 import com.module.api.entity.MerchantNotifyList;
 import com.module.api.mapper.MerchantNotifyMapper;
-import com.module.service.MerchantNotifyService;
 import org.springframework.stereotype.Service;
+import service.MerchantNotifyService;
+
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
